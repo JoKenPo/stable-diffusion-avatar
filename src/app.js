@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-
+import Avatar from './app/avatar.js';
 export class SetupApplication {
 
   constructor(port = 3000, app = express()) { 
@@ -17,9 +17,12 @@ export class SetupApplication {
   }
 
   setupRoutes() {
-    this.app.get("/avatar", (req, res) => {
-      res.send("Browser return")
-      console.log("Terminal return")
+    this.app.get("/avatar/:hash", async (req, res) => {
+      // res.send("Browser return")
+      // console.log("Terminal return")
+
+        return await new Avatar().renderImage(req, res);
+      
     });
   }
 
